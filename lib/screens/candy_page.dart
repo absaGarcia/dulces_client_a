@@ -12,7 +12,10 @@ class _CandyPageState extends State<CandyPage> {
     return Scaffold(
       appBar: AppBar(
         actions: <Widget>[
-          IconButton(icon: const Icon(Icons.menu), onPressed: null),
+          IconButton(
+              alignment: Alignment.bottomLeft,
+              icon: const Icon(Icons.menu),
+              onPressed: null),
         ],
       ),
     );

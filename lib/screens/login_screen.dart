@@ -1,4 +1,6 @@
 import 'package:dulces_client_a/components/rounded_button.dart';
+import 'package:dulces_client_a/screens/candy_page.dart';
+import 'package:dulces_client_a/screens/register_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
@@ -100,7 +102,9 @@ class _LoginScreenState extends State<LoginScreen> {
                 labelText: 'Ingresar',
                 color: Colors.amber,
                 onPressed: () {
-                  setState(() {});
+                  setState(() {
+                    Navigator.pushNamed(context, CandyPage.id);
+                  });
                 },
               ),
               SizedBox(
@@ -108,7 +112,11 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
               FlatButton(
                   textColor: Colors.white,
-                  onPressed: () {},
+                  onPressed: () {
+                    setState(() {
+                      Navigator.pushNamed(context, RegisterScreen.id);
+                    });
+                  },
                   child: Text(
                     'Registrate Aqui',
                     style: TextStyle(
