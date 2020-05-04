@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class RegisterScreen extends StatefulWidget {
-  static String id ='register_screen';
+  static String id = 'register_screen';
   @override
   _RegisterScreenState createState() => _RegisterScreenState();
 }
@@ -9,8 +9,10 @@ class RegisterScreen extends StatefulWidget {
 class _RegisterScreenState extends State<RegisterScreen> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      
+    return Scaffold(
+      body: Padding(
+        padding: null,
+      ),
     );
   }
 }

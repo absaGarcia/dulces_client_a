@@ -30,7 +30,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
               ),
               SizedBox(
-                height: 48.0,
+                height: 30.0,
               ),
               TextField(
                 keyboardType: TextInputType.emailAddress,
@@ -94,7 +94,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
               ),
               SizedBox(
-                height: 24.0,
+                height: 15.0,
               ),
               RoundedButton(
                 labelText: 'Ingresar',
@@ -103,6 +103,18 @@ class _LoginScreenState extends State<LoginScreen> {
                   setState(() {});
                 },
               ),
+              SizedBox(
+                height: 10.0,
+              ),
+              FlatButton(
+                  textColor: Colors.white,
+                  onPressed: () {},
+                  child: Text(
+                    'Registrate Aqui',
+                    style: TextStyle(
+                      fontSize: 12.0,
+                    ),
+                  ))
             ],
           ),
         ),
