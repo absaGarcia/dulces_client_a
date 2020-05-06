@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:dulces_client_a/components/menu_lateral.dart';
 
 class CandyPage extends StatefulWidget {
   static String id = 'candy_page';
@@ -11,13 +12,9 @@ class _CandyPageState extends State<CandyPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        actions: <Widget>[
-          IconButton(
-              alignment: Alignment.bottomLeft,
-              icon: const Icon(Icons.menu),
-              onPressed: null),
-        ],
+        title: Text('Dulces AG'),
       ),
+      drawer: MenuLateral(),
     );
   }
 }
