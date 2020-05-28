@@ -1,5 +1,7 @@
+import 'package:dulces_client_a/screens/candy_page.dart';
 import 'package:dulces_client_a/screens/car_shop.dart';
 import 'package:dulces_client_a/screens/order_list.dart';
+import 'package:dulces_client_a/screens/select_place.dart';
 import 'package:flutter/material.dart';
 
 class MenuLateral extends StatelessWidget {
@@ -22,9 +24,9 @@ class MenuLateral extends StatelessWidget {
                     children: <Widget>[
                       Column(
                         children: <Widget>[
-                          Icon(
-                            Icons.person,
-                            size: 80.0,
+                          Image.asset(
+                            'images/person.png',
+                            height: 100.0,
                           ),
                         ],
                       ),
@@ -66,6 +68,13 @@ class MenuLateral extends StatelessWidget {
             ),
           ),
           ListTile(
+            leading: Icon(Icons.fastfood),
+            title: Text('Productos'),
+            onTap: () {
+              Navigator.pushNamed(context, CandyPage.id);
+            },
+          ),
+          ListTile(
             leading: Icon(Icons.shopping_cart),
             title: Text('Carrito'),
             onTap: () {
@@ -75,6 +84,9 @@ class MenuLateral extends StatelessWidget {
           ListTile(
             leading: Icon(Icons.pin_drop),
             title: Text('Elige Ubicacion Actual'),
+             onTap: () {
+              Navigator.pushNamed(context, SelectPlace.id);
+            },
           ),
           ListTile(
             leading: Icon(Icons.archive),
