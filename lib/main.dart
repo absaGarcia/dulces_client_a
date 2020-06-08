@@ -1,3 +1,4 @@
+import 'package:dulces_client_a/screens/add_candy.dart';
 import 'package:dulces_client_a/screens/candy_page.dart';
 import 'package:dulces_client_a/screens/car_shop.dart';
 import 'package:dulces_client_a/screens/login_screen.dart';
@@ -22,6 +23,7 @@ class DulcesClient extends StatelessWidget {
         OrderList.id: (context) => OrderList(),
         CarShop.id: (context) => CarShop(),
         SelectPlace.id: (context) => SelectPlace(),
+        AddCandy.id: (context) => AddCandy(),
       },
     );
   }

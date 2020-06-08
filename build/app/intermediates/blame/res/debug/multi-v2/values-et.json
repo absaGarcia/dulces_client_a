@@ -4,6 +4,23 @@
             "outputFile": "D:\\eliecer\\Documents\\GitHub\\dulces_client_a\\build\\app\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-et\\values-et.xml",
             "map": [
                 {
+                    "source": "C:\\Users\\eliec\\.gradle\\caches\\transforms-2\\files-2.1\\9bba824547cb30431ce071a6a101e916\\jetified-play-services-basement-16.0.1\\res\\values-et\\values.xml",
+                    "from": {
+                        "startLines": "4",
+                        "startColumns": "0",
+                        "startOffsets": "247",
+                        "endColumns": "198",
+                        "endOffsets": "445"
+                    },
+                    "to": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "105",
+                        "endColumns": "198",
+                        "endOffsets": "299"
+                    }
+                },
+                {
                     "source": "C:\\Users\\eliec\\.gradle\\caches\\transforms-2\\files-2.1\\a528b13ac93e64cafa3d0480e2c93207\\core-1.1.0\\res\\values-et\\values-et.xml",
                     "from": {
                         "startLines": "2",
@@ -11,6 +28,13 @@
                         "startOffsets": "55",
                         "endColumns": "100",
                         "endOffsets": "151"
+                    },
+                    "to": {
+                        "startLines": "3",
+                        "startColumns": "4",
+                        "startOffsets": "304",
+                        "endColumns": "100",
+                        "endOffsets": "400"
                     }
                 }
             ]

@@ -67,6 +67,35 @@
 46-->D:\eliecer\Documents\GitHub\dulces_client_a\android\app\src\main\AndroidManifest.xml:27:13-44
 47            android:value="2" />
 47-->D:\eliecer\Documents\GitHub\dulces_client_a\android\app\src\main\AndroidManifest.xml:28:13-30
-48    </application>
-49
-50</manifest>
+48
+49        <service android:name="com.google.firebase.components.ComponentDiscoveryService" >
+49-->[:firebase_core] D:\eliecer\Documents\GitHub\dulces_client_a\build\firebase_core\intermediates\library_manifest\debug\AndroidManifest.xml:8:9-12:19
+49-->[:firebase_core] D:\eliecer\Documents\GitHub\dulces_client_a\build\firebase_core\intermediates\library_manifest\debug\AndroidManifest.xml:8:18-89
+50            <meta-data
+50-->[:firebase_core] D:\eliecer\Documents\GitHub\dulces_client_a\build\firebase_core\intermediates\library_manifest\debug\AndroidManifest.xml:9:13-11:85
+51                android:name="com.google.firebase.components:io.flutter.plugins.firebase.core.FlutterFirebaseAppRegistrar"
+51-->[:firebase_core] D:\eliecer\Documents\GitHub\dulces_client_a\build\firebase_core\intermediates\library_manifest\debug\AndroidManifest.xml:10:17-123
+52                android:value="com.google.firebase.components.ComponentRegistrar" />
+52-->[:firebase_core] D:\eliecer\Documents\GitHub\dulces_client_a\build\firebase_core\intermediates\library_manifest\debug\AndroidManifest.xml:11:17-82
+53        </service>
+54
+55        <provider
+55-->[com.google.firebase:firebase-common:16.1.0] C:\Users\eliec\.gradle\caches\transforms-2\files-2.1\c9085d612bc31e3b2b353c506bc52208\jetified-firebase-common-16.1.0\AndroidManifest.xml:12:9-16:39
+56            android:name="com.google.firebase.provider.FirebaseInitProvider"
+56-->[com.google.firebase:firebase-common:16.1.0] C:\Users\eliec\.gradle\caches\transforms-2\files-2.1\c9085d612bc31e3b2b353c506bc52208\jetified-firebase-common-16.1.0\AndroidManifest.xml:13:13-77
+57            android:authorities="com.example.dulces_client_a.firebaseinitprovider"
+57-->[com.google.firebase:firebase-common:16.1.0] C:\Users\eliec\.gradle\caches\transforms-2\files-2.1\c9085d612bc31e3b2b353c506bc52208\jetified-firebase-common-16.1.0\AndroidManifest.xml:14:13-72
+58            android:exported="false"
+58-->[com.google.firebase:firebase-common:16.1.0] C:\Users\eliec\.gradle\caches\transforms-2\files-2.1\c9085d612bc31e3b2b353c506bc52208\jetified-firebase-common-16.1.0\AndroidManifest.xml:15:13-37
+59            android:initOrder="100" />
+59-->[com.google.firebase:firebase-common:16.1.0] C:\Users\eliec\.gradle\caches\transforms-2\files-2.1\c9085d612bc31e3b2b353c506bc52208\jetified-firebase-common-16.1.0\AndroidManifest.xml:16:13-36
+60
+61        <meta-data
+61-->[com.google.android.gms:play-services-basement:16.0.1] C:\Users\eliec\.gradle\caches\transforms-2\files-2.1\9bba824547cb30431ce071a6a101e916\jetified-play-services-basement-16.0.1\AndroidManifest.xml:23:9-25:69
+62            android:name="com.google.android.gms.version"
+62-->[com.google.android.gms:play-services-basement:16.0.1] C:\Users\eliec\.gradle\caches\transforms-2\files-2.1\9bba824547cb30431ce071a6a101e916\jetified-play-services-basement-16.0.1\AndroidManifest.xml:24:13-58
+63            android:value="@integer/google_play_services_version" />
+63-->[com.google.android.gms:play-services-basement:16.0.1] C:\Users\eliec\.gradle\caches\transforms-2\files-2.1\9bba824547cb30431ce071a6a101e916\jetified-play-services-basement-16.0.1\AndroidManifest.xml:25:13-66
+64    </application>
+65
+66</manifest>

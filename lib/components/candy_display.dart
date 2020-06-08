@@ -17,11 +17,12 @@ class CandyDisplay extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+
       decoration: BoxDecoration(
         border: Border(
           bottom: BorderSide(
             width: 1.0,
-            color: Colors.white,
+            color: Colors.black,
           ),
         ),
       ),
@@ -57,6 +58,7 @@ class CandyDisplay extends StatelessWidget {
                   fontSize: 20.0,
                 ),
               ),
+              Text('Descripcion'),
             CarShopBottom(onPressed: onPressed,),
             ],
           ),
