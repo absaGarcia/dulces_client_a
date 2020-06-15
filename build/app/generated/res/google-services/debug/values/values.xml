@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="default_web_client_id" translatable="false">510175578292-9m3tbp55gspb10vcbktut2iqea0tlmo6.apps.googleusercontent.com</string>
+    <string name="firebase_database_url" translatable="false">https://dulces-ag.firebaseio.com</string>
+    <string name="gcm_defaultSenderId" translatable="false">510175578292</string>
+    <string name="google_api_key" translatable="false">AIzaSyBPKlgOTiuvZEDB8vrV2oluMXCEZwNjRz0</string>
+    <string name="google_app_id" translatable="false">1:510175578292:android:a86889b3de76d0e3862fe1</string>
+    <string name="google_crash_reporting_api_key" translatable="false">AIzaSyBPKlgOTiuvZEDB8vrV2oluMXCEZwNjRz0</string>
+    <string name="google_storage_bucket" translatable="false">dulces-ag.appspot.com</string>
+    <string name="project_id" translatable="false">dulces-ag</string>
+</resources>
