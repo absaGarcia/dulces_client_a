@@ -9,11 +9,15 @@ class Product {
   String _price;
   String _stock;
 
+
+
+
   Product.map(dynamic obj){
     this._name = obj['name'];
     this._description = obj ['description'];
     this._price = obj['price'];
     this._stock = obj['stock'];
+
   }
 
   String get id => _id;
@@ -22,12 +26,14 @@ class Product {
   String get price => _price;
   String get stock => _stock;
 
+
   Product.fromSnapShot(DataSnapshot snapshot){
     _id = snapshot.key;
     _name = snapshot.value['name'];
     _description = snapshot.value['description'];
     _price = snapshot.value['price'];
     _stock = snapshot.value['stock'];
+  
   }
 
 }

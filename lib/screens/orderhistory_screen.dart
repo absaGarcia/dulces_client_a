@@ -1,15 +1,54 @@
+import 'dart:async';
 
-import 'package:dulces_client_a/screens/car_shop.dart';
-import 'package:dulces_client_a/screens/listview_product.dart';
-import 'package:dulces_client_a/screens/orderhistory_screen.dart';
+import 'package:dulces_client_a/components/order.dart';
 
 import 'package:dulces_client_a/screens/select_place.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 
-class SideBar extends StatelessWidget {
+import 'car_shop.dart';
+import 'listview_product.dart';
+
+class OrderHistory extends StatefulWidget {
+  static String id ='orderhistory_screen'; 
+
+  @override
+  _OrderHistoryState createState() => _OrderHistoryState();
+}
+final productReference = FirebaseDatabase.instance.reference().child('order');
+class _OrderHistoryState extends State<OrderHistory> {
+   List<Order> items;
+ 
+  StreamSubscription<Event> _onProductAddedSubscription;
+  StreamSubscription<Event> _onProductChangeSubscription;
+  @override
+  void initState() {
+    super.initState();
+    items = new List();
+    
+    _onProductAddedSubscription =
+        productReference.onChildAdded.listen(_onProductAdded);
+    _onProductChangeSubscription =
+        productReference.onChildChanged.listen(_onProductUpdate);
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Drawer(
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData.dark(),
+      title: 'Pedidos',
+      home: Scaffold(
+        appBar: AppBar(
+          title: Text('Pedidos'),
+          centerTitle: true,
+        ),
+        drawer: Drawer(
       child: ListView(
         padding: EdgeInsets.zero,
         children: <Widget>[
@@ -108,6 +147,64 @@ class SideBar extends StatelessWidget {
           ),
         ],
       ),
+    ),
+        body: Center(
+          child: ListView.builder(
+            itemCount: items.length,
+            itemBuilder: (context, position) {
+              return Card(
+                margin: EdgeInsets.symmetric(horizontal: 10.0, vertical: 10.0),
+                elevation: 7,
+                child: Column(
+                  children: <Widget>[
+                    Divider(
+                      height: 7.0,
+                    ),
+                    Row(
+                      children: <Widget>[
+                     Expanded(child: _ordersHistory(position),),
+                          
+                      
+                      ],
+                    ),
+                  ],
+                ),
+              );
+            },
+          ),
+        ),
+        
+      ),
     );
   }
+
+ListTile _ordersHistory(int position){
+  if(items[position].userName == 'absa garcia'){
+      return ListTile(
+               title: Text(
+               '${items[position].name}',
+                style: TextStyle(
+                color: Colors.white,
+                 fontSize: 21.0, 
+                  ),
+                  ),
+               subtitle: Text('Cantidad: ${items[position].cuantity}'),
+     );
+                        
+  }
+}
+  
+void _onProductAdded(Event event) {
+  setState(() {
+    items.add(new Order.fromSnapShot(event.snapshot));
+  });
+}
+
+void _onProductUpdate(Event event) {
+  var oldProductValue = items.singleWhere((product) =>  product.id == event.snapshot.key);
+  setState(() {
+    items[items.indexOf(oldProductValue)] = new Order.fromSnapShot(event.snapshot);
+  });
+}
+
 }

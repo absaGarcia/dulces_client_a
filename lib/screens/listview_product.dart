@@ -3,11 +3,14 @@ import 'package:dulces_client_a/components/order.dart';
 import 'package:dulces_client_a/screens/car_shop.dart';
 import 'package:dulces_client_a/screens/product_information.dart';
 import 'package:dulces_client_a/screens/product_screen.dart';
+import 'package:dulces_client_a/screens/select_place.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'dart:async';
 import '../components/product.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+
+import 'orderhistory_screen.dart';
 
 
 class ListViewProducts extends StatefulWidget {
@@ -52,7 +55,7 @@ class _ListViewProductsState extends State<ListViewProducts> {
       title: 'Dulces',
       home: Scaffold(
         appBar: AppBar(
-          title: Text('Product Information'),
+          title: Text('Dulces'),
           centerTitle: true,
         ),
         drawer: Drawer(
@@ -73,24 +76,47 @@ class _ListViewProductsState extends State<ListViewProducts> {
                       Column(
                         children: <Widget>[
                           Image.asset(
-                            'images/logo_dulces.png',
-                            height: 130.0,
+                            'images/person.png',
+                            height: 100.0,
                           ),
                         ],
                       ),
-                    
+                      Column(
+                        children: <Widget>[
+                          Text(
+                            'Usuario',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 24,
+                            ),
+                          ),
+                          SizedBox(
+                            height: 8.0,
+                          ),
+                          Text(
+                            'Puntos: 0',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 24,
+                            ),
+                          ),
+                          SizedBox(
+                            height: 8.0,
+                          ),
+                          Text(
+                            'Telefono',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 24,
+                            ),
+                          ),
+                        ],
+                      ),
                     ],
                   ),
                 ],
               ),
             ),
-          ),
-          ListTile(
-            leading: Icon(Icons.receipt),
-            title: Text('Pedidos'),
-            onTap: () {
-              //Navigator.pushNamed(context, OrdersPage.id);
-            },
           ),
           ListTile(
             leading: Icon(Icons.fastfood),
@@ -100,17 +126,17 @@ class _ListViewProductsState extends State<ListViewProducts> {
             },
           ),
           ListTile(
-            leading: Icon(Icons.add_shopping_cart),
-            title: Text('Agregar Productos'),
+            leading: Icon(Icons.shopping_cart),
+            title: Text('Carrito'),
             onTap: () {
-              //Navigator.pushNamed(context, CarShop.id);
+              Navigator.pushNamed(context, CarShop.id);
             },
           ),
           ListTile(
-            leading: Icon(Icons.remove_shopping_cart),
-            title: Text('Modificar Productos'),
-             onTap: () {
-            
+            leading: Icon(Icons.pin_drop),
+            title: Text('Elige Ubicacion Actual'),
+            onTap: () {
+              Navigator.pushNamed(context, SelectPlace.id);
             },
           ),
           ListTile(
@@ -118,16 +144,16 @@ class _ListViewProductsState extends State<ListViewProducts> {
             title: Text('Historial de Pedidos'),
             onTap: () {
               // change app state...
-           
+              Navigator.pushNamed(context, OrderHistory.id);
             },
           ),
           ListTile(
-            leading: Icon(FontAwesomeIcons.calendarWeek),
-            title: Text('Configurar Recompensas'),
+            leading: Icon(Icons.account_circle),
+            title: Text('Recompensas'),
           ),
           ListTile(
             leading: Icon(Icons.settings),
-            title: Text('Configuracion de la Cuenta'),
+            title: Text('Configuracion'),
           ),
         ],
       ),
@@ -137,51 +163,50 @@ class _ListViewProductsState extends State<ListViewProducts> {
             itemCount: items.length,
             padding: EdgeInsets.only(top: 12.0),
             itemBuilder: (context, position) {
-              return Column(
-                children: <Widget>[
-                  Divider(
-                    height: 7.0,
-                  ),
-                  Row(
-                    children: <Widget>[
-                      Expanded(
-                        child: ListTile(
-                          title: Text(
-                            '${items[position].name}',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 21.0,
+              return Card(
+                elevation: 10,
+                child: Column(
+                  children: <Widget>[
+                    Divider(
+                      height: 7.0,
+                    ),
+                    Row(
+                      children: <Widget>[
+                        Expanded(
+                          child: ListTile(
+                            title: Text(
+                              '${items[position].name}',
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 21.0,
+                              ),
                             ),
-                          ),
-                          subtitle: Text(
-                            '${items[position].description}',
-                            style: TextStyle(
-                              color: Colors.blueGrey,
-                              fontSize: 16.0,
+                            subtitle: Text(
+                              '${items[position].description}',
+                              style: TextStyle(
+                                color: Colors.blueGrey,
+                                fontSize: 16.0,
+                              ),
                             ),
                           ),
                         ),
-                      ),
-                      IconButton(   
-                        icon: Icon(
-                          Icons.add,
-                          color: Colors.red,
+                        IconButton(   
+                          icon: Icon(
+                            Icons.add,
+                            color: Colors.red,
+                          ),
+                          onPressed: () =>
+                              _createOrder( context, items[position]),
                         ),
-                        onPressed: () =>
-                            _createOrder( context, items[position]),
-                      ),
-                    ],
-                  ),
-                ],
+                      ],
+                    ),
+                  ],
+                ),
               );
             },
           ),
         ),
-        floatingActionButton: FloatingActionButton(
-          child: Icon(Icons.add, color: Colors.white),
-          backgroundColor: Colors.deepOrangeAccent,
-          onPressed: () => _createNewProduct(context),
-        ),
+        
       ),
     );
   }
@@ -219,10 +244,10 @@ void _navigateToProduct(BuildContext context, Product product)async{
    );
 }
 
-void _createNewProduct(BuildContext context)async{
-   await Navigator.push(context, 
-   MaterialPageRoute(builder:(context)=> ProductScreen(Product(null,'','','',''))),
-   );
-}
+// void _createNewProduct(BuildContext context)async{
+//    await Navigator.push(context, 
+//    MaterialPageRoute(builder:(context)=> ProductScreen(Product(null,'','','',''))),
+//    );
+// }
 
 }

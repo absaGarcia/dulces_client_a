@@ -1,7 +1,7 @@
-import 'dart:async';
+
 
 import 'package:dulces_client_a/components/order.dart';
-import 'package:firebase_database/ui/utils/stream_subscriber_mixin.dart';
+
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:firebase_database/firebase_database.dart';
@@ -31,7 +31,8 @@ class _ProductInformationState extends State<ProductInformation> {
   TextEditingController _userName;
   TextEditingController _totalController;
 
-
+  List _place =['Mesas de la entrada','Jardineras', 'Edificio L','Mesas del F' ];
+  String _optionPlace ='Mesas de la entrada';
 
 
   // StreamSubscription<Event> _onAddOrderStreamSubscription;
@@ -41,7 +42,8 @@ class _ProductInformationState extends State<ProductInformation> {
     super.initState();
     orders = new List();
     // _onAddOrderStreamSubscription = orderReference.onChildAdded.listen( _onOrderAdd);
-    
+    _totalController =  new TextEditingController(text: total.toString());
+
     _nameController = new TextEditingController(text: widget.product.name);
     _priceController = new TextEditingController(text: widget.product.price);
     _stockController = new TextEditingController(text:widget.product.stock);
@@ -67,13 +69,8 @@ class _ProductInformationState extends State<ProductInformation> {
                     Padding(
                       padding:EdgeInsets.only(top:15.0),
                       ),
-                    Text("Nombre: ${widget.product.name}",
+                    Text("${widget.product.name}",
                     style: TextStyle(fontSize: 18.0),),
-                    Padding(padding: EdgeInsets.only(top: 8.0)),
-                    Divider(),
-                    Text("Descripcion: ${widget.product.description}",
-                    style: TextStyle(fontSize: 18.0,),
-                    ),
                     Padding(padding: EdgeInsets.only(top: 8.0)),
                     Divider(),
                      Text("Precio: \$${widget.product.price}",
@@ -103,11 +100,10 @@ class _ProductInformationState extends State<ProductInformation> {
                           Text('$cuantity'),
                           FlatButton(
                           onPressed: (){
-                       
                             setState(() {
-                            
                               if(cuantity >= 0){
                                 cuantity++;
+                                total = price*cuantity;
                               }  
                             });
                           }, child: Icon(FontAwesomeIcons.plus),
@@ -116,15 +112,23 @@ class _ProductInformationState extends State<ProductInformation> {
                           ),
                       ],
                     ),
+                    SizedBox(height: 15.0,),    
+                     _crearDropdown(),
                     SizedBox(height: 15.0,),
-                    Text('Total: \$${().toString()}',
+                    Text('Total: \$${(total).toString()}',
                     
                     ),
                     SizedBox(height: 15.0,),
                     RawMaterialButton(onPressed:(){
-                      
+                      _userName = new TextEditingController(text:'absa garcia');
+                      _totalController = new TextEditingController(text: total.toString());
                       _cuantityController = new TextEditingController(text: cuantity.toString());
-                      _onOrderAdd();},
+                      setState((){
+                        if(cuantity>0){
+                        _onOrderAdd();
+                      }
+                      });
+                      },
                   child: Text('Agregar'),
                   fillColor: Colors.blueAccent,
                   shape: RoundedRectangleBorder(
@@ -142,14 +146,53 @@ class _ProductInformationState extends State<ProductInformation> {
   void _onOrderAdd(){
      setState(() {
         orderReference.push().set({
+     
           'name' : _nameController.text,
           'cuantity' : _cuantityController.text,
-          'userName': _userName,
-          'total' : _totalController,
+          'userName': _userName.text,
+          'total' : _totalController.text,
+          'place': _optionPlace,
         }).then((_) => Navigator.pop(context),);
      });
   }
 
 
-
-}
+  
+    Widget _crearDropdown() {
+      return Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: <Widget>[
+        SizedBox(width:20),
+        Icon(Icons.gps_not_fixed),
+        SizedBox(width:20),
+        Text('Ubicacion'),
+        SizedBox(width:20),  
+        Expanded(
+          child: DropdownButton(
+          value: _optionPlace,
+          items: getOcionDropDown(), 
+          onChanged: (opt){
+            setState(() {
+              _optionPlace =opt;
+            });
+              }
+            ),
+          ),
+        ],
+      );
+    }
+  
+    List<DropdownMenuItem<String>> getOcionDropDown(){
+      List<DropdownMenuItem<String>> lista = new List();
+      _place.forEach((poder) { 
+        lista.add(DropdownMenuItem(
+          child: Text(poder),
+          value: poder,
+          ),
+        );
+      });
+      return lista;
+    }
+  }
+  
