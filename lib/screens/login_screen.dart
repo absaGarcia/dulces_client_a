@@ -1,5 +1,7 @@
 import 'package:dulces_client_a/components/rounded_button.dart';
-import 'package:dulces_client_a/screens/candy_page.dart';
+import 'package:dulces_client_a/screens/car_shop.dart';
+import 'package:dulces_client_a/screens/listview_product.dart';
+
 import 'package:dulces_client_a/screens/register_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -103,7 +105,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 color: Colors.amber,
                 onPressed: () {
                   setState(() {
-                    Navigator.pushNamed(context, CandyPage.id);
+                     Navigator.pushNamed(context, ListViewProducts.id);
                   });
                 },
               ),

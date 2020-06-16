@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'car_shop_bottom.dart';
 
-
 class CandyDisplay extends StatelessWidget {
   CandyDisplay({
     @required this.imageCandy,
@@ -12,12 +11,11 @@ class CandyDisplay extends StatelessWidget {
 
   final String imageCandy;
   final String labelCandy;
-  Function onPressed;
+  final Function onPressed;
 
   @override
   Widget build(BuildContext context) {
     return Container(
-
       decoration: BoxDecoration(
         border: Border(
           bottom: BorderSide(
@@ -59,7 +57,9 @@ class CandyDisplay extends StatelessWidget {
                 ),
               ),
               Text('Descripcion'),
-            CarShopBottom(onPressed: onPressed,),
+              CarShopBottom(
+                onPressed: onPressed,
+              ),
             ],
           ),
         ],
@@ -67,4 +67,3 @@ class CandyDisplay extends StatelessWidget {
     );
   }
 }
-
