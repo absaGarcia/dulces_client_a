@@ -173,22 +173,7 @@ class _ListViewProductsState extends State<ListViewProducts> {
                     Row(
                       children: <Widget>[
                         Expanded(
-                          child: ListTile(
-                            title: Text(
-                              '${items[position].name}',
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 21.0,
-                              ),
-                            ),
-                            subtitle: Text(
-                              '${items[position].description}',
-                              style: TextStyle(
-                                color: Colors.blueGrey,
-                                fontSize: 16.0,
-                              ),
-                            ),
-                          ),
+                          child: buildListTile(position),
                         ),
                         IconButton(   
                           icon: Icon(
@@ -209,6 +194,27 @@ class _ListViewProductsState extends State<ListViewProducts> {
         
       ),
     );
+  }
+
+  ListTile buildListTile(int position) {
+    if (items[position].stock != null) {
+    return ListTile(
+            title: Text(
+            '${items[position].name}',
+            style: TextStyle(
+            color: Colors.white,
+            fontSize: 21.0,
+              ),
+            ),
+            subtitle: Text(
+            '${items[position].description}',
+            style: TextStyle(
+              color: Colors.blueGrey,
+              fontSize: 16.0,
+              ),
+        ),
+      );
+    }
   }
 
 void _createOrder(BuildContext context, Product product)async{
@@ -244,10 +250,5 @@ void _navigateToProduct(BuildContext context, Product product)async{
    );
 }
 
-// void _createNewProduct(BuildContext context)async{
-//    await Navigator.push(context, 
-//    MaterialPageRoute(builder:(context)=> ProductScreen(Product(null,'','','',''))),
-//    );
-// }
 
 }

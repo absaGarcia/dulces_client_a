@@ -3,7 +3,6 @@ import 'package:dulces_client_a/screens/add_candy.dart';
 import 'package:dulces_client_a/screens/listview_product.dart';
 import 'package:dulces_client_a/screens/login_screen.dart';
 import 'package:dulces_client_a/screens/orderhistory_screen.dart';
-
 import 'package:dulces_client_a/screens/register_screen.dart';
 import 'package:dulces_client_a/screens/select_place.dart';
 import 'package:flutter/material.dart';

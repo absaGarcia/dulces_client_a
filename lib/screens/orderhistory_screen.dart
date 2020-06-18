@@ -21,6 +21,8 @@ class _OrderHistoryState extends State<OrderHistory> {
  
   StreamSubscription<Event> _onProductAddedSubscription;
   StreamSubscription<Event> _onProductChangeSubscription;
+
+  int get position => null;
   @override
   void initState() {
     super.initState();
@@ -149,6 +151,16 @@ class _OrderHistoryState extends State<OrderHistory> {
       ),
     ),
         body: Center(
+          child: _createList(context),
+        ),
+        
+      ),
+    );
+  }
+
+  Widget _createList(BuildContext context) {
+    return RefreshIndicator(
+          onRefresh: obtenerPagina1,
           child: ListView.builder(
             itemCount: items.length,
             itemBuilder: (context, position) {
@@ -163,8 +175,6 @@ class _OrderHistoryState extends State<OrderHistory> {
                     Row(
                       children: <Widget>[
                      Expanded(child: _ordersHistory(position),),
-                          
-                      
                       ],
                     ),
                   ],
@@ -172,25 +182,32 @@ class _OrderHistoryState extends State<OrderHistory> {
               );
             },
           ),
-        ),
-        
-      ),
     );
+  }
+
+Future<ListTile> obtenerPagina1()async{
+    final duration  = new Duration(seconds: 2);
+     new Timer(duration, (){
+       Navigator.pushNamed(context, OrderHistory.id);
+    },
+    );
+    return Future.delayed(duration);
   }
 
 ListTile _ordersHistory(int position){
   if(items[position].userName == 'absa garcia'){
       return ListTile(
-               title: Text(
-               '${items[position].name}',
-                style: TextStyle(
-                color: Colors.white,
-                 fontSize: 21.0, 
-                  ),
-                  ),
-               subtitle: Text('Cantidad: ${items[position].cuantity}'),
-     );
-                        
+        title: Text(
+          '${items[position].name}',
+        style: TextStyle(
+          color: Colors.white,
+          fontSize: 21.0, 
+          ),
+        ),
+        subtitle: Text('Cantidad: ${items[position].cuantity}'),
+        trailing: Text('${items[position].place}'),
+        leading: Text('\$${items[position].total}'),
+     );                
   }
 }
   

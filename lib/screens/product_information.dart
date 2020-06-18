@@ -15,6 +15,7 @@ class ProductInformation extends StatefulWidget {
 }
 
 final orderReference = FirebaseDatabase.instance.reference().child('order');
+final productReference = FirebaseDatabase.instance.reference().child('product');
 
 class _ProductInformationState extends State<ProductInformation> {
 
@@ -22,18 +23,19 @@ class _ProductInformationState extends State<ProductInformation> {
   int cuantity =0;
   int total=0;
   List<Order> orders;
+  String stockFirebase;
 
-  
   TextEditingController _nameController;
   TextEditingController _cuantityController;
   TextEditingController _priceController;
+  TextEditingController _descriptionController;
   TextEditingController _stockController;
   TextEditingController _userName;
   TextEditingController _totalController;
 
   List _place =['Mesas de la entrada','Jardineras', 'Edificio L','Mesas del F' ];
   String _optionPlace ='Mesas de la entrada';
-
+  
 
   // StreamSubscription<Event> _onAddOrderStreamSubscription;
   @override
@@ -41,18 +43,21 @@ class _ProductInformationState extends State<ProductInformation> {
     
     super.initState();
     orders = new List();
+    items = new List();
     // _onAddOrderStreamSubscription = orderReference.onChildAdded.listen( _onOrderAdd);
     _totalController =  new TextEditingController(text: total.toString());
-
     _nameController = new TextEditingController(text: widget.product.name);
     _priceController = new TextEditingController(text: widget.product.price);
     _stockController = new TextEditingController(text:widget.product.stock);
+    _descriptionController = new TextEditingController(text:widget.product.description);
   }
 
   @override
   Widget build(BuildContext context) {
 
       int price =  int.parse(widget.product.price);
+      int stock= int.parse(widget.product.stock);
+      int newStock; 
         return Scaffold(
           appBar: AppBar(
             title: Text('Agregar al Carrito'),
@@ -123,8 +128,10 @@ class _ProductInformationState extends State<ProductInformation> {
                       _userName = new TextEditingController(text:'absa garcia');
                       _totalController = new TextEditingController(text: total.toString());
                       _cuantityController = new TextEditingController(text: cuantity.toString());
+                      _stockController = TextEditingController(text:(stock-cuantity).toString());
                       setState((){
                         if(cuantity>0){
+                        _updateStock();
                         _onOrderAdd();
                       }
                       });
@@ -146,7 +153,6 @@ class _ProductInformationState extends State<ProductInformation> {
   void _onOrderAdd(){
      setState(() {
         orderReference.push().set({
-     
           'name' : _nameController.text,
           'cuantity' : _cuantityController.text,
           'userName': _userName.text,
@@ -156,7 +162,18 @@ class _ProductInformationState extends State<ProductInformation> {
      });
   }
 
-
+  void _updateStock(){
+    setState(() {
+    if(widget.product.id != null){
+      productReference.child(widget.product.id).set({
+       'name' : _nameController.text,
+       'description' : _descriptionController.text,
+       'price' : _priceController.text,
+       'stock' : _stockController.text, 
+      });
+    }
+    });
+  }
   
     Widget _crearDropdown() {
       return Row(
