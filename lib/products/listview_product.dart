@@ -48,24 +48,16 @@ class _ListViewProductsState extends State<ListViewProducts> {
   Widget build(BuildContext context) { 
     return Scaffold(
       body: Container(
-        child: Column(
-          children: <Widget>[
-            Text("HOLA", style: new TextStyle(fontSize: 28), ),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 20.0,),
-                child: ListView.builder(
-                  padding: EdgeInsets.only(top: 12.0),
-                  itemCount: items.length,
-                  itemBuilder: (context, position) {
-                    return Container(
-                      child: buildListTile(position),    
-                    );
-                  },
-                ),
-              ),
-            ],
-          ),
-        ),   
+        child:  ListView.builder(
+          padding: EdgeInsets.only(top: 12.0),
+          itemCount: items.length,
+          itemBuilder: (context, position) {
+            return Container(
+              child: buildListTile(position),    
+            );
+          },
+        ),
+      ),  
     );
   }
 
