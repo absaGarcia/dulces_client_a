@@ -1,10 +1,9 @@
-import 'package:dulces_client_a/components/rounded_button.dart';
+import 'package:dulces_client_a/navigation_bloc/navigation.dart';
+import '../components/rounded_button.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'login_screen.dart';
 
-class RegisterScreen extends StatefulWidget {
-  static String id = 'register_screen';
+class RegisterScreen extends StatefulWidget with NavigationStates{
   @override
   _RegisterScreenState createState() => _RegisterScreenState();
 }
@@ -118,9 +117,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
               labelText: 'Registrarse',
               color: Colors.amber,
               onPressed: () {
-                setState(() {
-                  Navigator.pushNamed(context, LoginScreen.id);
-                });
               },
             ),
           ],

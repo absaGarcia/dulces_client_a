@@ -1,14 +1,11 @@
-import 'package:dulces_client_a/components/rounded_button.dart';
-import 'package:dulces_client_a/screens/car_shop.dart';
-import 'package:dulces_client_a/screens/listview_product.dart';
-
-import 'package:dulces_client_a/screens/register_screen.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
+import 'package:dulces_client_a/navigation_bloc/navigation.dart';
+import '../components/rounded_button.dart';
 
-class LoginScreen extends StatefulWidget {
-  static String id = 'login_screen';
+class LoginScreen extends StatefulWidget with NavigationStates{
   @override
   _LoginScreenState createState() => _LoginScreenState();
 }
@@ -104,9 +101,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 labelText: 'Ingresar',
                 color: Colors.amber,
                 onPressed: () {
-                  setState(() {
-                     Navigator.pushNamed(context, ListViewProducts.id);
-                  });
+                  BlocProvider.of<NavigationBloc>(context).add(NavigationEvents.PedidosEvent);
                 },
               ),
               SizedBox(
@@ -115,9 +110,6 @@ class _LoginScreenState extends State<LoginScreen> {
               FlatButton(
                   textColor: Colors.white,
                   onPressed: () {
-                    setState(() {
-                      Navigator.pushNamed(context, RegisterScreen.id);
-                    });
                   },
                   child: Text(
                     'Registrate Aqui',

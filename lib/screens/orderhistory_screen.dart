@@ -1,17 +1,10 @@
 import 'dart:async';
-
-import 'package:dulces_client_a/components/order.dart';
-
-import 'package:dulces_client_a/screens/select_place.dart';
+import 'package:dulces_client_a/navigation_bloc/navigation.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
+import '../objects/order.dart';
 
-import 'car_shop.dart';
-import 'listview_product.dart';
-
-class OrderHistory extends StatefulWidget {
-  static String id ='orderhistory_screen'; 
-
+class OrderHistory extends StatefulWidget with NavigationStates {
   @override
   _OrderHistoryState createState() => _OrderHistoryState();
 }
@@ -114,29 +107,24 @@ class _OrderHistoryState extends State<OrderHistory> {
             leading: Icon(Icons.fastfood),
             title: Text('Productos'),
             onTap: () {
-              Navigator.pushNamed(context, ListViewProducts.id);
             },
           ),
           ListTile(
             leading: Icon(Icons.shopping_cart),
             title: Text('Carrito'),
             onTap: () {
-              Navigator.pushNamed(context, CarShop.id);
             },
           ),
           ListTile(
             leading: Icon(Icons.pin_drop),
             title: Text('Elige Ubicacion Actual'),
             onTap: () {
-              Navigator.pushNamed(context, SelectPlace.id);
             },
           ),
           ListTile(
             leading: Icon(Icons.archive),
             title: Text('Historial de Pedidos'),
             onTap: () {
-              // change app state...
-              Navigator.pushNamed(context, OrderHistory.id);
             },
           ),
           ListTile(
@@ -188,7 +176,6 @@ class _OrderHistoryState extends State<OrderHistory> {
 Future<ListTile> obtenerPagina1()async{
     final duration  = new Duration(seconds: 2);
      new Timer(duration, (){
-       Navigator.pushNamed(context, OrderHistory.id);
     },
     );
     return Future.delayed(duration);

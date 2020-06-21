@@ -1,4 +1,4 @@
-#Wed Jun 17 18:30:44 CDT 2020
-base.0=D\:\\eliecer\\Documents\\GitHub\\dulces_client_a\\build\\app\\intermediates\\dex\\debug\\mergeDexDebug\\out\\classes.dex
+#Thu Jun 18 19:46:27 CDT 2020
+base.0=C\:\\Users\\delfi\\Desktop\\dulces_client_a\\build\\app\\intermediates\\dex\\debug\\mergeDexDebug\\out\\classes.dex
 path.0=classes.dex
 renamed.0=classes.dex
