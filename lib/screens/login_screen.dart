@@ -6,6 +6,7 @@ import 'package:dulces_client_a/screens/register_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
+import 'package:dulces_client_a/service/auth.dart';
 
 class LoginScreen extends StatefulWidget {
   static String id = 'login_screen';
@@ -15,6 +16,62 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   bool showSpinner = false;
+  final txtEmailController = TextEditingController();
+  final txtPassController = TextEditingController();
+  
+  void loginAction(BuildContext context) async {
+
+    String email = txtEmailController.text;
+    String password = txtPassController.text;
+
+    if(password.length < 6){
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+            return AlertDialog(
+                title: Text('La contraseña debe tener al menos 6 caracteres'),
+                elevation: 24,
+                actions: <Widget>[
+                  FlatButton( 
+                    child: Text('OK'),
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    }, 
+                  )
+                ],
+              );
+            }
+        );
+    }else{
+      Auth auth = Auth();
+      String uid = await auth.signIn(email, password);
+      if(uid != "error"){
+        setState(() {
+          Navigator.pushNamed(context, ListViewProducts.id);
+        });
+      }else{
+        showDialog(
+        context: context,
+        builder: (BuildContext context) {
+            return AlertDialog(
+                title: Text('Ocurrió un error, por favor vuelve a intentar'),
+                elevation: 24,
+                actions: <Widget>[
+                  FlatButton( 
+                    child: Text('OK'),
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    }, 
+                  )
+                ],
+              );
+            }
+        );
+      }
+      
+    }
+
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -104,9 +161,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 labelText: 'Ingresar',
                 color: Colors.amber,
                 onPressed: () {
-                  setState(() {
-                     Navigator.pushNamed(context, ListViewProducts.id);
-                  });
+                  loginAction(context);
                 },
               ),
               SizedBox(
@@ -118,7 +173,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     setState(() {
                       Navigator.pushNamed(context, RegisterScreen.id);
                     });
-                  },
+                  },  
                   child: Text(
                     'Registrate Aqui',
                     style: TextStyle(

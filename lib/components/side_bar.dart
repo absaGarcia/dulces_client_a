@@ -1,11 +1,23 @@
 
 import 'package:dulces_client_a/screens/car_shop.dart';
 import 'package:dulces_client_a/screens/listview_product.dart';
-
+import 'package:dulces_client_a/screens/login_screen.dart';
 import 'package:dulces_client_a/screens/select_place.dart';
 import 'package:flutter/material.dart';
+import 'package:dulces_client_a/service/auth.dart';
 
 class SideBar extends StatelessWidget {
+
+   void logOutAction(BuildContext context) async {
+    Auth auth = Auth();
+    try{
+      auth.signOut();
+      Navigator.pushNamed(context, LoginScreen.id);
+    }catch(e){
+      print("error");
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Drawer(
@@ -104,6 +116,13 @@ class SideBar extends StatelessWidget {
           ListTile(
             leading: Icon(Icons.settings),
             title: Text('Configuracion'),
+          ),
+          ListTile(
+            leading: Icon(Icons.settings),
+            title: Text('Cerrar sesión'),
+            onTap: () {
+              logOutAction(context);
+            },
           ),
         ],
       ),
