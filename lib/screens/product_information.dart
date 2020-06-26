@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:dulces_client_a/components/order.dart';
 import 'package:firebase_database/ui/utils/stream_subscriber_mixin.dart';
 import 'package:flutter/material.dart';
@@ -117,7 +116,7 @@ class _ProductInformationState extends State<ProductInformation> {
                       ],
                     ),
                     SizedBox(height: 15.0,),
-                    Text('Total: \$${().toString()}',
+                    Text('Total: \$',
                     
                     ),
                     SizedBox(height: 15.0,),

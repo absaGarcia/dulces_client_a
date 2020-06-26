@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "D:\\eliecer\\Documents\\GitHub\\dulces_client_a\\build\\app\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-uk\\values-uk.xml",
+            "outputFile": "H:\\www\\dulces_client_a\\build\\app\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-uk\\values-uk.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\eliec\\.gradle\\caches\\transforms-2\\files-2.1\\3aaf6e5219b7f981ec263df919098c6f\\core-1.1.0\\res\\values-uk\\values-uk.xml",
+                    "source": "C:\\Users\\aluca\\.gradle\\caches\\transforms-2\\files-2.1\\3aaf6e5219b7f981ec263df919098c6f\\core-1.1.0\\res\\values-uk\\values-uk.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",
@@ -21,7 +21,7 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\eliec\\.gradle\\caches\\transforms-2\\files-2.1\\6eb14f512292913515d869914807ad40\\play-services-base-17.1.0\\res\\values-uk\\values.xml",
+                    "source": "C:\\Users\\aluca\\.gradle\\caches\\transforms-2\\files-2.1\\6eb14f512292913515d869914807ad40\\play-services-base-17.1.0\\res\\values-uk\\values.xml",
                     "from": {
                         "startLines": "4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20",
                         "startColumns": "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0",
@@ -38,7 +38,7 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\eliec\\.gradle\\caches\\transforms-2\\files-2.1\\cd2cc680c3c7dc18d97c742c5a65335e\\jetified-play-services-basement-17.0.0\\res\\values-uk\\values.xml",
+                    "source": "C:\\Users\\aluca\\.gradle\\caches\\transforms-2\\files-2.1\\494899ef69eea781699939ec4fd902c7\\jetified-play-services-basement-17.0.0\\res\\values-uk\\values.xml",
                     "from": {
                         "startLines": "4",
                         "startColumns": "0",
