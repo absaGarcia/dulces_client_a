@@ -161,9 +161,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 labelText: 'Ingresar',
                 color: Colors.amber,
                 onPressed: () {
-                  setState(() {
-                     Navigator.pushNamed(context, ListViewProducts.id);
-                  });
+                  loginAction(context);
                 },
               ),
               SizedBox(
@@ -175,7 +173,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     setState(() {
                       Navigator.pushNamed(context, RegisterScreen.id);
                     });
-                  },
+                  },  
                   child: Text(
                     'Registrate Aqui',
                     style: TextStyle(
