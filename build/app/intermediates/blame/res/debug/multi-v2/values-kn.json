@@ -1,27 +1,27 @@
 {
     "logs": [
         {
-            "outputFile": "C:\\Users\\delfi\\Desktop\\dulces_client_a\\build\\app\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-kn\\values-kn.xml",
+            "outputFile": "D:\\eliecer\\Documents\\GitHub\\dulces_client_a\\build\\app\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-kn\\values-kn.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\delfi\\.gradle\\caches\\transforms-2\\files-2.1\\b75a4802881ba0f67bd7d03a5fee144b\\jetified-play-services-basement-17.0.0\\res\\values-kn\\values.xml",
+                    "source": "C:\\Users\\eliec\\.gradle\\caches\\transforms-2\\files-2.1\\fdd1d924d9d4aeba2785fceb0b790aec\\core-1.1.0\\res\\values-kn\\values-kn.xml",
                     "from": {
-                        "startLines": "4",
-                        "startColumns": "0",
-                        "startOffsets": "247",
-                        "endColumns": "204",
-                        "endOffsets": "451"
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endColumns": "100",
+                        "endOffsets": "151"
                     },
                     "to": {
-                        "startLines": "10",
+                        "startLines": "20",
                         "startColumns": "4",
-                        "startOffsets": "1271",
-                        "endColumns": "204",
-                        "endOffsets": "1471"
+                        "startOffsets": "2825",
+                        "endColumns": "100",
+                        "endOffsets": "2921"
                     }
                 },
                 {
-                    "source": "C:\\Users\\delfi\\.gradle\\caches\\transforms-2\\files-2.1\\6eb14f512292913515d869914807ad40\\play-services-base-17.1.0\\res\\values-kn\\values.xml",
+                    "source": "C:\\Users\\eliec\\.gradle\\caches\\transforms-2\\files-2.1\\0ee3366b2ac789d11e56a3c001272dd4\\jetified-play-services-base-17.1.0\\res\\values-kn\\values.xml",
                     "from": {
                         "startLines": "4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20",
                         "startColumns": "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0",
@@ -38,20 +38,20 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\delfi\\.gradle\\caches\\transforms-2\\files-2.1\\3aaf6e5219b7f981ec263df919098c6f\\core-1.1.0\\res\\values-kn\\values-kn.xml",
+                    "source": "C:\\Users\\eliec\\.gradle\\caches\\transforms-2\\files-2.1\\3b9678029632a8bd70da4e4034bdbe61\\jetified-play-services-basement-17.0.0\\res\\values-kn\\values.xml",
                     "from": {
-                        "startLines": "2",
-                        "startColumns": "4",
-                        "startOffsets": "55",
-                        "endColumns": "100",
-                        "endOffsets": "151"
+                        "startLines": "4",
+                        "startColumns": "0",
+                        "startOffsets": "247",
+                        "endColumns": "204",
+                        "endOffsets": "451"
                     },
                     "to": {
-                        "startLines": "20",
+                        "startLines": "10",
                         "startColumns": "4",
-                        "startOffsets": "2825",
-                        "endColumns": "100",
-                        "endOffsets": "2921"
+                        "startOffsets": "1271",
+                        "endColumns": "204",
+                        "endOffsets": "1471"
                     }
                 }
             ]
