@@ -1,4 +1,4 @@
-#Fri Jul 03 17:05:55 CDT 2020
+#Sat Jul 04 07:31:21 CDT 2020
 base.0=D\:\\eliecer\\Documents\\GitHub\\dulces_client_a\\build\\app\\intermediates\\dex\\debug\\out\\classes.dex
 path.0=classes.dex
 renamed.0=classes.dex
