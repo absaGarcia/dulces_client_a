@@ -15,6 +15,7 @@ class ListViewProducts extends StatefulWidget with NavigationStates {
 }
 
 final productReference = FirebaseDatabase.instance.reference().child('product');
+final orderReference = FirebaseDatabase.instance.reference().child('order');
 
 class _ListViewProductsState extends State<ListViewProducts> {
   List<Product> items;
@@ -31,11 +32,20 @@ class _ListViewProductsState extends State<ListViewProducts> {
   String _optionPlace = 'Mesas de la entrada';
 
   List<Order> itemOrder;
+  TextEditingController _nameController;
+  TextEditingController _cuantityController;
+  TextEditingController _priceController;
+  TextEditingController _stockController;
+  TextEditingController _placeController;
+  TextEditingController _userName;
+  TextEditingController _totalController;
+
   @override
   void initState() {
     super.initState();
     items = new List();
     itemOrder = new List();
+
     _onProductAddedSubscription =
         productReference.onChildAdded.listen(_onProductAdded);
     _onProductChangeSubscription =
@@ -164,6 +174,9 @@ class _ListViewProductsState extends State<ListViewProducts> {
       barrierDismissible: true,
       builder: (BuildContext context) {
         cuantity = 0;
+        total = 0;
+        _nameController = TextEditingController(text: items[position].name);
+        _stockController = TextEditingController(text: items[position].stock);
         return StatefulBuilder(
           builder: (context, setState) {
             return AlertDialog(
@@ -182,7 +195,7 @@ class _ListViewProductsState extends State<ListViewProducts> {
                       height: 15.0,
                     ),
                     Text(
-                      "Producto ${items[position].name} ",
+                      "${items[position].name} ",
                       style: TextStyle(
                           fontSize: 22.0,
                           color: Theme.CompanyColors.black[500]),
@@ -225,7 +238,6 @@ class _ListViewProductsState extends State<ListViewProducts> {
                                 cuantity--;
                                 total =
                                     int.parse(items[position].price) * cuantity;
-                                print(cuantity);
                               }
                             });
                           },
@@ -240,7 +252,6 @@ class _ListViewProductsState extends State<ListViewProducts> {
                             setState(() {
                               if (cuantity >= 0) {
                                 cuantity++;
-                                print(cuantity);
                                 total =
                                     int.parse(items[position].price) * cuantity;
                               }
@@ -262,20 +273,24 @@ class _ListViewProductsState extends State<ListViewProducts> {
                     ),
                     InkWell(
                       onTap: () {
-//                        _userName =
-//                            new TextEditingController(text: 'absa garcia');
-//                        _totalController =
-//                            new TextEditingController(text: total.toString());
-//                        _cuantityController = new TextEditingController(
-//                            text: cuantity.toString());
-//                        _stockController = TextEditingController(
-//                            text: (stock - cuantity).toString());
-//                        setState(() {
-//                          if (cuantity > 0) {
+                        _userName =
+                            new TextEditingController(text: 'absa garcia');
+                        print(_userName);
+                        _totalController =
+                            new TextEditingController(text: total.toString());
+                        _cuantityController = new TextEditingController(
+                            text: cuantity.toString());
+
+                        _stockController =
+                            TextEditingController(text: 3.toString());
+
+                        setState(() {
+                          if (cuantity > 0) {
 //                            _updateStock();
-//                            _onOrderAdd();
-//                          }
-//                        });
+                            _onOrderAdd();
+                            print(_optionPlace);
+                          }
+                        });
                       },
                       child: Container(
                         padding: EdgeInsets.only(top: 20.0, bottom: 20.0),
@@ -286,7 +301,7 @@ class _ListViewProductsState extends State<ListViewProducts> {
                               bottomRight: Radius.circular(32.0)),
                         ),
                         child: Text(
-                          "Agregar al carrito",
+                          "Realizar Orden",
                           style: TextStyle(
                             color: Colors.white,
                             fontSize: 20.0,
@@ -304,34 +319,42 @@ class _ListViewProductsState extends State<ListViewProducts> {
       });
 
   Widget _crearDropdown() {
-    return Container(
-        alignment: Alignment.center,
-        color: Theme.CompanyColors.black[200],
-        child: Row(
-          children: <Widget>[
-            SizedBox(width: 50),
-            Icon(
-              Icons.gps_not_fixed,
-              color: Theme.CompanyColors.black[500],
-            ),
-            SizedBox(width: 20),
-            Expanded(
-              child: DropdownButton(
-                icon: Icon(Icons.arrow_drop_down),
-                iconSize: 42,
-                underline: SizedBox(),
-                value: _optionPlace,
-                items: getOcionDropDown(),
-                onChanged: (opt) {
-                  setState(() {
-                    _optionPlace = opt;
-                  });
-                },
-                style: TextStyle(color: Theme.CompanyColors.black[200]),
+    return StatefulBuilder(
+      builder: (context, setState) {
+        return Container(
+          alignment: Alignment.center,
+          color: Theme.CompanyColors.black[200],
+          child: Row(
+            children: <Widget>[
+              SizedBox(width: 50),
+              Icon(
+                Icons.gps_not_fixed,
+                color: Theme.CompanyColors.black[500],
               ),
-            ),
-          ],
-        ));
+              SizedBox(width: 20),
+              Expanded(
+                child: DropdownButton(
+                  icon: Icon(Icons.arrow_drop_down),
+                  iconSize: 42,
+                  underline: SizedBox(),
+                  value: _optionPlace,
+                  items: getOcionDropDown(),
+                  onChanged: (opt) {
+                    setState(() {
+                      _optionPlace = opt;
+
+                      _placeController =
+                          TextEditingController(text: _optionPlace);
+                    });
+                  },
+                  style: TextStyle(color: Theme.CompanyColors.black[200]),
+                ),
+              ),
+            ],
+          ),
+        );
+      },
+    );
   }
 
   List<DropdownMenuItem<String>> getOcionDropDown() {
@@ -380,5 +403,19 @@ class _ListViewProductsState extends State<ListViewProducts> {
     //context,
     //MaterialPageRoute(builder: (context) => ProductInformation(product, cant)),
     //);
+  }
+
+  void _onOrderAdd() {
+    setState(() {
+      orderReference.push().set({
+        'name': _nameController.text,
+        'cuantity': _cuantityController.text,
+        'userName': _userName.text,
+        'total': _totalController.text,
+        'place': _placeController.text,
+      }).then(
+        (_) => Navigator.pop(context),
+      );
+    });
   }
 }
