@@ -96,7 +96,7 @@ class _SideBarState extends State<SideBar> with SingleTickerProviderStateMixin<S
                         ),
                       ),
                       Divider(
-                        height: 14,
+                        height: 20,
                         thickness: 0.5,
                         color: Colors.white.withOpacity(0.3),
                         indent: 32,
@@ -144,11 +144,10 @@ class _SideBarState extends State<SideBar> with SingleTickerProviderStateMixin<S
                           onIconPressed();
                         },
                       ),
-                      SizedBox(
-                        height: 120,
-                      ),
+
+
                       Divider(
-                        height: 14,
+                        height: 70,
                         thickness: 1.0,
                         color: Colors.white.withOpacity(0.3),
                         indent: 32,
