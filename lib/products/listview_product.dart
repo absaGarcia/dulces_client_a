@@ -18,12 +18,17 @@ final productReference = FirebaseDatabase.instance.reference().child('product');
 
 class _ListViewProductsState extends State<ListViewProducts> {
   List<Product> items;
-  int cuantity =0;
-  int total=0;
+  int cuantity = 0;
+  int total = 0;
   StreamSubscription<Event> _onProductAddedSubscription;
   StreamSubscription<Event> _onProductChangeSubscription;
-  List _place =['Mesas de la entrada','Jardineras', 'Edificio L','Mesas del F' ];
-  String _optionPlace ='Mesas de la entrada';
+  List _place = [
+    'Mesas de la entrada',
+    'Jardineras',
+    'Edificio L',
+    'Mesas del F'
+  ];
+  String _optionPlace = 'Mesas de la entrada';
 
   List<Order> itemOrder;
   @override
@@ -150,151 +155,196 @@ class _ListViewProductsState extends State<ListViewProducts> {
     }
   }
 
-  void _createOrder(BuildContext context, int position) async {
-    showDialog(context: context,
+  int updateCuantity(int cuantity) {
+    return cuantity;
+  }
+
+  void _createOrder(BuildContext context, int position) async => showDialog(
+      context: context,
       barrierDismissible: true,
-      builder: (BuildContext context){  
-        return AlertDialog(
-
-          shape:  RoundedRectangleBorder(
-                borderRadius: BorderRadius.all(Radius.circular(32.0))),
-          contentPadding: EdgeInsets.only(top: 10.0),
-          backgroundColor: Theme.CompanyColors.black[200],
-
-          content: Container(
-            width: 350,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                mainAxisSize: MainAxisSize.min,
-                children: <Widget>[
-
-                  SizedBox(height: 15.0,),
-                  Text("Producto ${items[position].name} ", 
-                  style: TextStyle(fontSize: 22.0, color: Theme.CompanyColors.black[500]), textAlign: TextAlign.center,),
-                  Divider(height: 45,),
-
-                  SizedBox(height: 5.0,),
-                  Text("Precio: \$${items[position].price} ", 
-                  style: TextStyle(fontSize: 18.0, color: Theme.CompanyColors.black[500]), textAlign: TextAlign.center,),
-
-                  SizedBox(height: 15.0,), 
-                  Text('Total: \$${(total).toString()} ',  
-                  style: TextStyle(fontSize: 18.0, color: Theme.CompanyColors.black[500]), 
-                  textAlign: TextAlign.center,
-                  ),
-                                    
-                  SizedBox(height: 15.0,),   
-                  Row(
+      builder: (BuildContext context) {
+        cuantity = 0;
+        return StatefulBuilder(
+          builder: (context, setState) {
+            return AlertDialog(
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(32.0))),
+              contentPadding: EdgeInsets.only(top: 10.0),
+              backgroundColor: Theme.CompanyColors.black[200],
+              content: Container(
+                width: 350,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  mainAxisSize: MainAxisSize.min,
+                  children: <Widget>[
+                    SizedBox(
+                      height: 15.0,
+                    ),
+                    Text(
+                      "Producto ${items[position].name} ",
+                      style: TextStyle(
+                          fontSize: 22.0,
+                          color: Theme.CompanyColors.black[500]),
+                      textAlign: TextAlign.center,
+                    ),
+                    Divider(
+                      height: 45,
+                    ),
+                    SizedBox(
+                      height: 5.0,
+                    ),
+                    Text(
+                      "Precio: \$${items[position].price} ",
+                      style: TextStyle(
+                          fontSize: 18.0,
+                          color: Theme.CompanyColors.black[500]),
+                      textAlign: TextAlign.center,
+                    ),
+                    SizedBox(
+                      height: 15.0,
+                    ),
+                    Text(
+                      'Total: \$${(total).toString()} ',
+                      style: TextStyle(
+                          fontSize: 18.0,
+                          color: Theme.CompanyColors.black[500]),
+                      textAlign: TextAlign.center,
+                    ),
+                    SizedBox(
+                      height: 15.0,
+                    ),
+                    Row(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
                         FlatButton(
-                          onPressed: (){
+                          onPressed: () {
                             setState(() {
-                              if(cuantity >0){
+                              if (cuantity > 0) {
                                 cuantity--;
-                                total = int.parse(items[position].price) * cuantity;
-                              }    
+                                total =
+                                    int.parse(items[position].price) * cuantity;
+                                print(cuantity);
+                              }
                             });
-                          }, child: Icon(FontAwesomeIcons.minus, color: Theme.CompanyColors.black[200]),
+                          },
+                          child: Icon(FontAwesomeIcons.minus,
+                              color: Theme.CompanyColors.black[200]),
                           shape: CircleBorder(),
                           color: Theme.CompanyColors.black[400],
-                          ),
-                          Text('$cuantity'),
-                          FlatButton(
-                          onPressed: (){
+                        ),
+                        Text('${cuantity = updateCuantity(cuantity)}'),
+                        FlatButton(
+                          onPressed: () {
                             setState(() {
-                              if(cuantity >= 0){
+                              if (cuantity >= 0) {
                                 cuantity++;
-                                total = int.parse(items[position].price) * cuantity;
-                              } 
+                                print(cuantity);
+                                total =
+                                    int.parse(items[position].price) * cuantity;
+                              }
                             });
-                          }, child: Icon(FontAwesomeIcons.plus, color: Theme.CompanyColors.black[200]),
+                          },
+                          child: Icon(FontAwesomeIcons.plus,
+                              color: Theme.CompanyColors.black[200]),
                           shape: CircleBorder(),
                           color: Theme.CompanyColors.black[400],
-                          ),
+                        ),
                       ],
                     ),
-                    SizedBox(height: 15.0,),    
-
+                    SizedBox(
+                      height: 15.0,
+                    ),
                     _crearDropdown(),
-
-                  SizedBox(height: 15.0,),
-                  InkWell(
-                    onTap: () {
-                      //_userName = new TextEditingController(text:'absa garcia');
-                      //_totalController = new TextEditingController(text: total.toString());
-                      //_cuantityController = new TextEditingController(text: cuantity.toString());
-                      //_stockController = TextEditingController(text:(stock-cuantity).toString());
-                      //setState((){
-                      //  if(cuantity>0){
-                      //  _updateStock();
-                      //  _onOrderAdd();
-                      //}});
-                    },
-                    child: Container(
-                      padding: EdgeInsets.only(top: 20.0, bottom: 20.0),
-                      decoration: BoxDecoration(
-                        color: Theme.CompanyColors.black[400],
-                        borderRadius: BorderRadius.only(
-                            bottomLeft: Radius.circular(32.0),
-                            bottomRight: Radius.circular(32.0)),
-                      ),
-                      child: Text(
-                        "Agregar al carrito",
-                        style: TextStyle(color: Colors.white, fontSize: 20.0,),
-                        textAlign: TextAlign.center,
+                    SizedBox(
+                      height: 15.0,
+                    ),
+                    InkWell(
+                      onTap: () {
+//                        _userName =
+//                            new TextEditingController(text: 'absa garcia');
+//                        _totalController =
+//                            new TextEditingController(text: total.toString());
+//                        _cuantityController = new TextEditingController(
+//                            text: cuantity.toString());
+//                        _stockController = TextEditingController(
+//                            text: (stock - cuantity).toString());
+//                        setState(() {
+//                          if (cuantity > 0) {
+//                            _updateStock();
+//                            _onOrderAdd();
+//                          }
+//                        });
+                      },
+                      child: Container(
+                        padding: EdgeInsets.only(top: 20.0, bottom: 20.0),
+                        decoration: BoxDecoration(
+                          color: Theme.CompanyColors.black[400],
+                          borderRadius: BorderRadius.only(
+                              bottomLeft: Radius.circular(32.0),
+                              bottomRight: Radius.circular(32.0)),
+                        ),
+                        child: Text(
+                          "Agregar al carrito",
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 20.0,
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
                       ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
-            ),
-          );
-      }
-    );
-    //await Navigator.push(
-      //context,
-      //MaterialPageRoute(builder: (context) => AddCandyPop(product)),
-    //);
-  }
+            );
+          },
+        );
+      });
 
   Widget _crearDropdown() {
     return Container(
-      alignment: Alignment.center,
-      color: Theme.CompanyColors.black[200],
-      child: Row(
-        children: <Widget>[
-          SizedBox(width:50),
-          Icon(Icons.gps_not_fixed, color: Theme.CompanyColors.black[500],),
-          SizedBox(width:20), 
-          Expanded(
-            child: DropdownButton(
-            icon: Icon(Icons.arrow_drop_down),
-            iconSize: 42,
-            underline: SizedBox(),
-            value: _optionPlace,
-            items: getOcionDropDown(), 
-            onChanged: (opt){
-              setState(() {
-                _optionPlace =opt;
-              });
-              },
-              style: TextStyle(color: Theme.CompanyColors.black[200]),
+        alignment: Alignment.center,
+        color: Theme.CompanyColors.black[200],
+        child: Row(
+          children: <Widget>[
+            SizedBox(width: 50),
+            Icon(
+              Icons.gps_not_fixed,
+              color: Theme.CompanyColors.black[500],
             ),
-          ),
-        ],
-      )
-    );
+            SizedBox(width: 20),
+            Expanded(
+              child: DropdownButton(
+                icon: Icon(Icons.arrow_drop_down),
+                iconSize: 42,
+                underline: SizedBox(),
+                value: _optionPlace,
+                items: getOcionDropDown(),
+                onChanged: (opt) {
+                  setState(() {
+                    _optionPlace = opt;
+                  });
+                },
+                style: TextStyle(color: Theme.CompanyColors.black[200]),
+              ),
+            ),
+          ],
+        ));
   }
 
-  List<DropdownMenuItem<String>> getOcionDropDown(){
+  List<DropdownMenuItem<String>> getOcionDropDown() {
     List<DropdownMenuItem<String>> lista = new List();
-    _place.forEach((poder) { 
-      lista.add(DropdownMenuItem(
-        child: Text(poder, style: TextStyle(color: Theme.CompanyColors.black[500], fontSize: 18),),
-        value: poder,
+    _place.forEach((poder) {
+      lista.add(
+        DropdownMenuItem(
+          child: Text(
+            poder,
+            style:
+                TextStyle(color: Theme.CompanyColors.black[500], fontSize: 18),
+          ),
+          value: poder,
         ),
       );
     });
@@ -324,10 +374,11 @@ class _ListViewProductsState extends State<ListViewProducts> {
     );
   }
 
-  void _navigateToProduct(BuildContext context, Product product, int cant) async {
+  void _navigateToProduct(
+      BuildContext context, Product product, int cant) async {
     //await Navigator.push(
-      //context,
-      //MaterialPageRoute(builder: (context) => ProductInformation(product, cant)),
+    //context,
+    //MaterialPageRoute(builder: (context) => ProductInformation(product, cant)),
     //);
   }
 }

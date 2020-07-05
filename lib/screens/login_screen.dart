@@ -164,7 +164,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   BlocProvider.of<NavigationBloc>(context)
                       .add(NavigationEvents.PedidosEvent);
 
-                  loginAction(context);
+                  // loginAction(context);
                 },
               ),
               SizedBox(
