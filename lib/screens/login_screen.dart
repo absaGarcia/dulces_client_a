@@ -161,8 +161,8 @@ class _LoginScreenState extends State<LoginScreen> {
                 labelText: 'Ingresar',
                 color: Colors.amber,
                 onPressed: () {
-//                  BlocProvider.of<NavigationBloc>(context)
-//                      .add(NavigationEvents.PedidosEvent);
+                  BlocProvider.of<NavigationBloc>(context)
+                      .add(NavigationEvents.PedidosEvent);
 
                   loginAction(context);
                 },
