@@ -1,10 +1,14 @@
 import 'dart:async';
+import 'package:dulces_client_a/products/listview_product.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rxdart/rxdart.dart';
 import '../components/menu_item.dart';
 import '../navigation_bloc/navigation.dart';
 import '../theme.dart' as Theme;
+
+FirebaseUser loggedUser;
 
 class SideBar extends StatefulWidget{
   _SideBarState createState() => _SideBarState();
@@ -16,13 +20,28 @@ class _SideBarState extends State<SideBar> with SingleTickerProviderStateMixin<S
   Stream<bool> isSidebarOpenedStream;
   StreamSink<bool> isSidebarOpenedSink;
   final _animationDuration = const Duration(milliseconds: 500);
-
+  final _auth = FirebaseAuth.instance;
   void initState() {
     super.initState();
+    getCurrentUser();
     _animationController = AnimationController(vsync: this, duration: _animationDuration);
     isSidebarOpenedStreamController = PublishSubject<bool>();
     isSidebarOpenedStream = isSidebarOpenedStreamController.stream;
     isSidebarOpenedSink = isSidebarOpenedStreamController.sink;
+  }
+
+void getCurrentUser() async {
+    try {
+      final user = await _auth.currentUser();
+      if (user != null) {
+        loggedUser = user;
+        print('=============');
+        print(loggedUser.email);
+        print(loggedUser.uid.toString());
+      }
+    } catch (e) {
+      print(e);
+    }
   }
 
   void dispose() {
@@ -164,7 +183,7 @@ class _SideBarState extends State<SideBar> with SingleTickerProviderStateMixin<S
                         title: "Salir",
                         onTap: () {
                           onIconPressed();
-                            BlocProvider.of<NavigationBloc>(context).add(NavigationEvents.LoginEvent);
+                            _signOut();
                         }
                       ),
                     ],
@@ -199,6 +218,19 @@ class _SideBarState extends State<SideBar> with SingleTickerProviderStateMixin<S
         );
       },
     );
+  }
+
+   _signOut()async{
+    // _auth.signOut();
+    // Future<FirebaseUser> user;
+    // user=loggedUser;
+    
+    // user = FirebaseAuth.instance.currentUser();
+    print('=============');
+    print('exito');
+    FirebaseAuth.instance.signOut();
+    loggedUser =  await FirebaseAuth.instance.currentUser();
+    BlocProvider.of<NavigationBloc>(context).add(NavigationEvents.LoginEvent);
   }
 }
 
