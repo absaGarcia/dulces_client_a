@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "D:\\eliecer\\Documents\\GitHub\\dulces_client_a\\build\\app\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-v16\\values-v16.xml",
+            "outputFile": "C:\\Users\\delfi\\Desktop\\dulces_client_a\\build\\app\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-v16\\values-v16.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\eliec\\.gradle\\caches\\transforms-2\\files-2.1\\fdd1d924d9d4aeba2785fceb0b790aec\\core-1.1.0\\res\\values-v16\\values-v16.xml",
+                    "source": "C:\\Users\\delfi\\.gradle\\caches\\transforms-2\\files-2.1\\fdd1d924d9d4aeba2785fceb0b790aec\\core-1.1.0\\res\\values-v16\\values-v16.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",

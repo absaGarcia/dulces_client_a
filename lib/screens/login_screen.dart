@@ -1,4 +1,3 @@
-import 'package:dulces_client_a/products/listview_product.dart';
 import 'package:dulces_client_a/service/auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -44,7 +43,7 @@ class _LoginScreenState extends State<LoginScreen> {
       if (uid != "error") {
         setState(() {
           BlocProvider.of<NavigationBloc>(context)
-              .add(NavigationEvents.PedidosEvent);
+              .add(NavigationEvents.LisViewEvent);
         });
       } else {
         showDialog(
@@ -162,7 +161,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 color: Colors.amber,
                 onPressed: () {
                   BlocProvider.of<NavigationBloc>(context)
-                      .add(NavigationEvents.PedidosEvent);
+                      .add(NavigationEvents.LisViewEvent);
 
                   // loginAction(context);
                 },
@@ -172,7 +171,10 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
               FlatButton(
                   textColor: Colors.white,
-                  onPressed: () {},
+                  onPressed: () {
+                    BlocProvider.of<NavigationBloc>(context)
+                      .add(NavigationEvents.RegisterEvent);
+                  },
                   child: Text(
                     'Registrate Aqui',
                     style: TextStyle(

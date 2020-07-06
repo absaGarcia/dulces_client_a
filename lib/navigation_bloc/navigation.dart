@@ -1,11 +1,13 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../screens/login_screen.dart';
 import '../products/listview_product.dart';
+import '../screens/register_screen.dart';
 import 'package:bloc/bloc.dart';
 
 enum NavigationEvents {
   LoginEvent,
-  PedidosEvent,
+  LisViewEvent,
+  RegisterEvent,
 }
 
 abstract class NavigationStates {}
@@ -22,8 +24,12 @@ class NavigationBloc extends Bloc<NavigationEvents, NavigationStates>{
           yield LoginScreen();
           break;
           
-        case NavigationEvents.PedidosEvent:
+        case NavigationEvents.LisViewEvent:
           yield ListViewProducts();
+          break;
+
+        case NavigationEvents.RegisterEvent:
+          yield RegisterScreen();
           break;
           
         default:
