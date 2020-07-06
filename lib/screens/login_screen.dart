@@ -1,24 +1,28 @@
-import 'package:dulces_client_a/products/listview_product.dart';
 import 'package:dulces_client_a/service/auth.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
 import 'package:dulces_client_a/navigation_bloc/navigation.dart';
 import '../components/rounded_button.dart';
+import '../bloc/provider.dart';
 
+final bloc = LoginBloc();
 class LoginScreen extends StatefulWidget with NavigationStates {
+   
   @override
   _LoginScreenState createState() => _LoginScreenState();
 }
 
 class _LoginScreenState extends State<LoginScreen> {
   bool showSpinner = false;
+   final _auth = FirebaseAuth.instance;
   final txtEmailController = TextEditingController();
   final txtPassController = TextEditingController();
   String email;
   String password;
-
+ 
   void loginAction(BuildContext context) async {
     if (password.length <= 6) {
       showDialog(
@@ -79,25 +83,36 @@ class _LoginScreenState extends State<LoginScreen> {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
               Flexible(
-                child: Container(
-                  height: 200.0,
-                  child: Image.asset('images/logo_dulces.png'),
+                child: Hero(
+                  tag: 'logo',
+                  child: Container(
+                    height: 200.0,
+                    child: Image.asset('images/logo_dulces.png'),
+                  ),
                 ),
               ),
               SizedBox(
                 height: 30.0,
               ),
-              TextField(
+              StreamBuilder(
+                stream: bloc.emailStream ,
+                builder: (BuildContext context, AsyncSnapshot snapshot){
+                  return Container(
+                    child:   TextField(
                 keyboardType: TextInputType.emailAddress,
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   color: Colors.black,
                 ),
                 onChanged: (value) {
+                  bloc.changeEmail;
                   email = value;
                 },
                 decoration: InputDecoration(
+                  counterText: snapshot.data,
                   hintText: 'Ingresa tu Correo',
+                  labelText: 'Ingresa tu Correo',
+                  errorText: snapshot.error,
                   hintStyle: TextStyle(
                     color: Colors.black45,
                   ),
@@ -119,6 +134,10 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                 ),
               ),
+                  );
+                },
+              ),
+           
               SizedBox(
                 height: 8.0,
               ),
@@ -133,6 +152,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 },
                 decoration: InputDecoration(
                   hintText: 'Ingresa tu Contrasena',
+                  labelText: 'Ingresa tu Contrasena',
                   hintStyle: TextStyle(
                     color: Colors.black45,
                   ),
@@ -160,25 +180,48 @@ class _LoginScreenState extends State<LoginScreen> {
               RoundedButton(
                 labelText: 'Ingresar',
                 color: Colors.amber,
-                onPressed: () {
-                  BlocProvider.of<NavigationBloc>(context)
+                onPressed: ()async{
+                  try {
+                    final user = await _auth.signInWithEmailAndPassword(
+                        email: email, password: password);
+                    if (user != null) {
+                    BlocProvider.of<NavigationBloc>(context)
                       .add(NavigationEvents.PedidosEvent);
 
+                    }
+                
+                  } catch (e) {
+                    print(e);
+                  }
+                  
                   // loginAction(context);
                 },
               ),
               SizedBox(
                 height: 10.0,
               ),
-              FlatButton(
+              StreamBuilder(
+                stream:bloc.formValidStream ,
+                builder: (BuildContext context, AsyncSnapshot snapshot){
+                  return Container(
+                    child: FlatButton(
                   textColor: Colors.white,
-                  onPressed: () {},
+                  onPressed: () {
+                 
+                    BlocProvider.of<NavigationBloc>(context)
+                      .add(NavigationEvents.RegisterEvent);
+                  },
                   child: Text(
                     'Registrate Aqui',
                     style: TextStyle(
+                      color: Colors.grey,
                       fontSize: 12.0,
                     ),
-                  ))
+                  ),
+                ),
+                  );
+                },
+              ),
             ],
           ),
         ),

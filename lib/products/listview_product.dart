@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:dulces_client_a/navigation_bloc/navigation.dart';
@@ -7,6 +8,8 @@ import '../objects/product.dart';
 import '../objects/order.dart';
 import '../products/product_screen.dart';
 import '../theme.dart' as Theme;
+
+FirebaseUser loggedUser;
 
 class ListViewProducts extends StatefulWidget with NavigationStates {
   @override
@@ -18,6 +21,8 @@ final productReference = FirebaseDatabase.instance.reference().child('product');
 final orderReference = FirebaseDatabase.instance.reference().child('order');
 
 class _ListViewProductsState extends State<ListViewProducts> {
+  final _auth = FirebaseAuth.instance;
+
   List<Product> items;
   int cuantity = 0;
   int total = 0;
@@ -45,11 +50,25 @@ class _ListViewProductsState extends State<ListViewProducts> {
     super.initState();
     items = new List();
     itemOrder = new List();
-
+    getCurrentUser();
     _onProductAddedSubscription =
         productReference.onChildAdded.listen(_onProductAdded);
     _onProductChangeSubscription =
         productReference.onChildChanged.listen(_onProductUpdate);
+  }
+
+  void getCurrentUser() async {
+    try {
+      final user = await _auth.currentUser();
+      if (user != null) {
+        loggedUser = user;
+        print('=============');
+        print(loggedUser.email);
+        print(loggedUser.uid.toString());
+      }
+    } catch (e) {
+      print(e);
+    }
   }
 
   @override
@@ -273,8 +292,8 @@ class _ListViewProductsState extends State<ListViewProducts> {
                     ),
                     InkWell(
                       onTap: () {
-                        _userName =
-                            new TextEditingController(text: 'absa garcia');
+                        _userName = new TextEditingController(
+                            text: loggedUser.email.toString());
                         print(_userName);
                         _totalController =
                             new TextEditingController(text: total.toString());
