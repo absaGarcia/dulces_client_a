@@ -1,3 +1,4 @@
+import 'package:dulces_client_a/screens/orderhistory_screen.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../screens/login_screen.dart';
 import '../products/listview_product.dart';
@@ -8,6 +9,7 @@ enum NavigationEvents {
   LoginEvent,
   LisViewEvent,
   RegisterEvent,
+  OrderHistoryEvent,
 }
 
 abstract class NavigationStates {}
@@ -30,6 +32,10 @@ class NavigationBloc extends Bloc<NavigationEvents, NavigationStates>{
 
         case NavigationEvents.RegisterEvent:
           yield RegisterScreen();
+          break;
+
+        case NavigationEvents.OrderHistoryEvent:
+          yield OrderHistory();
           break;
           
         default:

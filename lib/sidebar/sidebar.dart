@@ -135,6 +135,8 @@ class _SideBarState extends State<SideBar> with SingleTickerProviderStateMixin<S
                         title: "Pedidos",
                         onTap: () {
                           onIconPressed();
+                          BlocProvider.of<NavigationBloc>(context)
+                              .add(NavigationEvents.OrderHistoryEvent);
                         },
                       ),
                       MenuItem(
