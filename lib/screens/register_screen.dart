@@ -25,15 +25,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
               spreadRadius: 2.0,
               offset: Offset(0.0, 5.0))
           ],
-          gradient: new LinearGradient(
-            colors: [
-              Theme.CompanyColors.black[300],
-              Theme.CompanyColors.black[200],
-            ],
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-            tileMode: TileMode.clamp
-          )
+          color: Theme.CompanyColors.black[200]
         ),
 
         child: new Column(
